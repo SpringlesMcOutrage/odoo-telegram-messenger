@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="messengers_client.TelegramMessenger">
+        <div class="telegram-messenger">
+            <div class="telegram-chat-list">
+                <div class="telegram-chat-list-header">
+                    <h3>Telegram</h3>
+                </div>
+
+                <div class="telegram-chat-list-search">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        t-model="state.searchQuery"
+                    />
+                </div>
+
+                <div class="telegram-chat-list-items">
+                    <t t-foreach="filteredChats" t-as="chat" t-key="chat.id">
+                        <div
+                            class="telegram-chat-item"
+                            t-att-class="{ active: state.selectedChat and state.selectedChat.id === chat.id }"
+                            t-on-click="() => this.selectChat(chat)"
+                        >
+                            <div class="telegram-chat-avatar">
+                                <t t-esc="getInitials(chat.name)"/>
+                            </div>
+                            <div class="telegram-chat-info">
+                                <div class="telegram-chat-header-info">
+                                    <span class="telegram-chat-name">
+                                        <t t-esc="chat.name"/>
+                                    </span>
+                                    <span class="telegram-chat-time">
+                                        <t t-esc="getLastMessageTime(chat)"/>
+                                    </span>
+                                </div>
+                                <div class="telegram-chat-preview">
+                                    <t t-esc="getLastMessage(chat)"/>
+                                    <t t-if="chat.unread_count > 0">
+                                        <span class="telegram-chat-unread">
+                                            <t t-esc="chat.unread_count"/>
+                                        </span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <div class="telegram-chat-window">
+                <t t-if="state.selectedChat">
+                    <div class="telegram-chat-header">
+                        <div class="telegram-chat-avatar">
+                            <t t-esc="getInitials(state.selectedChat.name)"/>
+                        </div>
+                        <div class="telegram-chat-header-details">
+                            <h3><t t-esc="state.selectedChat.name"/></h3>
+                            <div class="telegram-chat-status">
+                                <t t-if="state.selectedChat.username">
+                                    @<t t-esc="state.selectedChat.username"/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="telegram-messages" t-ref="messages">
+                        <t t-foreach="state.messages" t-as="message" t-key="message.id">
+                            <div
+                                class="telegram-message"
+                                t-att-class="{ incoming: message.is_incoming, outgoing: !message.is_incoming }"
+                            >
+                                <div class="telegram-message-bubble">
+                                    <div class="telegram-message-content">
+                                        <t t-esc="message.content"/>
+                                    </div>
+                                    <div class="telegram-message-time">
+                                        <t t-esc="formatTime(message.date)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="telegram-input-area">
+                        <input
+                            type="text"
+                            placeholder="Type a message..."
+                            t-model="state.messageInput"
+                            t-on-keydown="onMessageKeydown"
+                        />
+                        <button
+                            t-on-click="sendMessage"
+                            t-att-disabled="!state.messageInput.trim()"
+                        >
+                            Send
+                        </button>
+                    </div>
+                </t>
+
+                <t t-else="">
+                    <div class="telegram-empty-state">
+                        <i class="fa fa-comments-o"/>
+                        <p>Select a chat to start messaging</p>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

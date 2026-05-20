@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * messengers_client
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-21 00:00+0000\n"
+"PO-Revision-Date: 2026-05-21 00:00+0000\n"
+"Last-Translator: deep <>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "Token from @BotFather"
+msgstr "Токен від @BotFather"
+
+msgid "URL for receiving messages"
+msgstr "URL для отримання повідомлень"
+
+msgid "For long polling"
+msgstr "Для long polling"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "Enable automatic message polling via long polling"
+msgstr "Отримувати повідомлення через long polling"
+
+msgid "Please configure a Telegram Bot in Settings → Technical → Telegram Config"
+msgstr "Налаштуйте Telegram Bot у меню Налаштування → Технічне → Telegram Config"
+
+msgid "Success!"
+msgstr "Успішно!"
+
+msgid "Successfully connected to bot %s!"
+msgstr "Підключення до бота %s успішне!"
+
+msgid "Error: %s"
+msgstr "Помилка: %s"
+
+msgid "Connection error: %s"
+msgstr "Помилка підключення: %s"
+
+msgid "Contact Name"
+msgstr "Ім'я контакту"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Avatar"
+msgstr "Аватар"
+
+msgid "Unread"
+msgstr "Непрочитані"
+
+msgid "Messages"
+msgstr "Повідомлення"
+
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Content"
+msgstr "Вміст"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Incoming"
+msgstr "Вхідне"
+
+msgid "Read"
+msgstr "Прочитано"
+
+msgid "Sender"
+msgstr "Відправник"
+
+msgid "Attachments"
+msgstr "Вкладення"
+
+msgid "Messengers"
+msgstr "Месенджери"
+
+msgid "Check Connection"
+msgstr "Перевірити підключення"
+
+msgid "Configuration Name"
+msgstr "Назва конфігурації"
+
+msgid "How to set up your Telegram Bot:"
+msgstr "Як налаштувати Telegram Bot:"
+
+msgid "Find @BotFather in Telegram"
+msgstr "Знайдіть @BotFather у Telegram"
+
+msgid "Send the /newbot command"
+msgstr "Відправте команду /newbot"
+
+msgid "Give the bot a name and username (must end with 'bot')"
+msgstr "Дайте боту назву та username (має закінчуватись на 'bot')"
+
+msgid "Copy the token provided by BotFather"
+msgstr "Скопіюйте токен, який надасть BotFather"
+
+msgid "Paste the token into the \"Bot Token\" field above"
+msgstr "Вставте токен у поле \"Bot Token\" вище"
+
+msgid "Click \"Check Connection\""
+msgstr "Натисніть \"Перевірити підключення\""
+
+msgid "Enable \"Long Polling\" for automatic message polling"
+msgstr "Увімкніть \"Long Polling\" для автоматичного отримання повідомлень"
+
+msgid "Note:"
+msgstr "Примітка:"
+
+msgid "Long Polling automatically checks for new messages every minute."
+msgstr "Long Polling автоматично перевіряє нові повідомлення щохвилини."
+
+msgid "Telegram Chats"
+msgstr "Telegram-чати"
+
+msgid "Telegram Chat"
+msgstr "Telegram-чат"
+
+msgid "Mark as Read"
+msgstr "Позначити як прочитане"
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Failed to send message via Telegram API"
+msgstr "Помилка відправки повідомлення через Telegram API"
+
+msgid "Search..."
+msgstr "Пошук..."
+
+msgid "Type a message..."
+msgstr "Введіть повідомлення..."
+
+msgid "Send"
+msgstr "Відправити"
+
+msgid "Select a chat to start messaging"
+msgstr "Оберіть чат для початку спілкування"

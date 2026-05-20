@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_telegram_messenger" model="ir.actions.client">
+        <field name="name">Telegram Messenger</field>
+        <field name="tag">telegram_messenger</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_messengers_root"
+              name="Messengers"
+              sequence="5"
+              web_icon="messengers_client,static/description/icon.png"/>
+
+    <menuitem id="menu_telegram"
+              name="Telegram"
+              parent="menu_messengers_root"
+              action="action_telegram_messenger"
+              sequence="10"/>
+</odoo>

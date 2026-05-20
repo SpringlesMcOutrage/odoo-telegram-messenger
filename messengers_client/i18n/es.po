@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * messengers_client
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-21 00:00+0000\n"
+"PO-Revision-Date: 2026-05-21 00:00+0000\n"
+"Last-Translator: deep <>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Token from @BotFather"
+msgstr "Token de @BotFather"
+
+msgid "URL for receiving messages"
+msgstr "URL para recibir mensajes"
+
+msgid "For long polling"
+msgstr "Para long polling"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Enable automatic message polling via long polling"
+msgstr "Activar sondeo automático de mensajes mediante long polling"
+
+msgid "Please configure a Telegram Bot in Settings → Technical → Telegram Config"
+msgstr "Configure un bot de Telegram en Ajustes → Técnico → Configuración de Telegram"
+
+msgid "Success!"
+msgstr "¡Éxito!"
+
+msgid "Successfully connected to bot %s!"
+msgstr "¡Conectado correctamente al bot %s!"
+
+msgid "Error: %s"
+msgstr "Error: %s"
+
+msgid "Connection error: %s"
+msgstr "Error de conexión: %s"
+
+msgid "Contact Name"
+msgstr "Nombre del contacto"
+
+msgid "Phone"
+msgstr "Teléfono"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "Unread"
+msgstr "No leídos"
+
+msgid "Messages"
+msgstr "Mensajes"
+
+msgid "Chat"
+msgstr "Chat"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Incoming"
+msgstr "Entrante"
+
+msgid "Read"
+msgstr "Leído"
+
+msgid "Sender"
+msgstr "Remitente"
+
+msgid "Attachments"
+msgstr "Adjuntos"
+
+msgid "Messengers"
+msgstr "Mensajería"
+
+msgid "Check Connection"
+msgstr "Verificar conexión"
+
+msgid "Configuration Name"
+msgstr "Nombre de configuración"
+
+msgid "How to set up your Telegram Bot:"
+msgstr "Cómo configurar su bot de Telegram:"
+
+msgid "Find @BotFather in Telegram"
+msgstr "Busque @BotFather en Telegram"
+
+msgid "Send the /newbot command"
+msgstr "Envíe el comando /newbot"
+
+msgid "Give the bot a name and username (must end with 'bot')"
+msgstr "Dé al bot un nombre y nombre de usuario (debe terminar en 'bot')"
+
+msgid "Copy the token provided by BotFather"
+msgstr "Copie el token proporcionado por BotFather"
+
+msgid "Paste the token into the \"Bot Token\" field above"
+msgstr "Pegue el token en el campo \"Bot Token\" de arriba"
+
+msgid "Click \"Check Connection\""
+msgstr "Haga clic en \"Verificar conexión\""
+
+msgid "Enable \"Long Polling\" for automatic message polling"
+msgstr "Active \"Long Polling\" para el sondeo automático de mensajes"
+
+msgid "Note:"
+msgstr "Nota:"
+
+msgid "Long Polling automatically checks for new messages every minute."
+msgstr "Long Polling comprueba automáticamente si hay mensajes nuevos cada minuto."
+
+msgid "Telegram Chats"
+msgstr "Chats de Telegram"
+
+msgid "Telegram Chat"
+msgstr "Chat de Telegram"
+
+msgid "Mark as Read"
+msgstr "Marcar como leído"
+
+msgid "Message"
+msgstr "Mensaje"
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Failed to send message via Telegram API"
+msgstr "Error al enviar el mensaje a través de la API de Telegram"
+
+msgid "Search..."
+msgstr "Buscar..."
+
+msgid "Type a message..."
+msgstr "Escriba un mensaje..."
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Select a chat to start messaging"
+msgstr "Seleccione un chat para comenzar a mensajear"

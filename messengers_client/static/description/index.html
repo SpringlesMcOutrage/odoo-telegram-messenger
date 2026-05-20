@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Telegram Messenger Integration — Odoo 18</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #2c2c2c;
+    background: #fff;
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a0f1e 0%, #0d1f3c 50%, #0088cc 100%);
+    padding: 60px 40px;
+    text-align: center;
+    color: #fff;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 30px;
+    padding: 5px 18px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    color: #a8d8ff;
+  }
+  .hero h1 { font-size: 44px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
+  .hero h1 span { color: #29b6f6; }
+  .hero p { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 640px; margin: 0 auto 32px; }
+  .telegram-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 4px 16px rgba(41,182,246,0.4));
+  }
+  .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #e0f0ff;
+  }
+  .badge.green { background: rgba(52,199,89,0.15); border-color: rgba(52,199,89,0.3); color: #6ddc96; }
+  .badge.blue { background: rgba(41,182,246,0.2); border-color: rgba(41,182,246,0.35); color: #7dd3fc; }
+
+  /* LAYOUT */
+  .section { padding: 56px 40px; max-width: 860px; margin: 0 auto; }
+  .section-title { font-size: 28px; font-weight: 700; color: #0d1f3c; margin-bottom: 8px; }
+  .section-subtitle { font-size: 16px; color: #666; margin-bottom: 36px; }
+  .divider { height: 1px; background: #eee; margin: 0 40px; }
+
+  /* FEATURES GRID */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .feature-card {
+    border: 1px solid #e0ecf8;
+    border-radius: 12px;
+    padding: 24px;
+    background: #f7fbff;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-card:hover { box-shadow: 0 8px 24px rgba(0,136,204,0.12); transform: translateY(-2px); }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .icon-blue { background: #dbeeff; }
+  .icon-teal { background: #d5f5f6; }
+  .icon-green { background: #dcfce7; }
+  .icon-purple { background: #ede9fe; }
+  .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #0a0f1e; }
+  .feature-card p { font-size: 14px; color: #666; }
+
+  /* POLLING VS WEBHOOK */
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .mode-card { border-radius: 12px; padding: 28px; border: 2px solid transparent; }
+  .mode-card.polling { background: #e8f8ff; border-color: #b3dff7; }
+  .mode-card.webhook { background: #e8fff3; border-color: #b3f0cc; }
+  .mode-card h3 { font-size: 19px; font-weight: 800; margin-bottom: 6px; }
+  .mode-card.polling h3 { color: #0d1f3c; }
+  .mode-card.webhook h3 { color: #064e3b; }
+  .mode-badge {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .mode-card.polling .mode-badge { background: #0088cc; color: #fff; }
+  .mode-card.webhook .mode-badge { background: #10b981; color: #fff; }
+  .mode-card ul { list-style: none; }
+  .mode-card ul li { padding: 5px 0; font-size: 14px; color: #444; }
+  .mode-card ul li::before { content: "• "; font-weight: 700; }
+  .mode-card.polling ul li::before { color: #0088cc; }
+  .mode-card.webhook ul li::before { color: #10b981; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 4px; }
+  .step { display: flex; align-items: flex-start; }
+  .step-left { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
+  .step-num {
+    width: 36px; height: 36px;
+    background: #0088cc; color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; flex-shrink: 0;
+  }
+  .step-line { width: 2px; background: #c8e6f7; flex: 1; min-height: 20px; }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding: 6px 0 24px 18px; }
+  .step-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: #0a0f1e; }
+  .step-body p { font-size: 14px; color: #555; }
+  .step-body code {
+    background: #e8f3ff; padding: 2px 7px; border-radius: 4px;
+    font-size: 13px; color: #0d1f3c; font-family: 'Courier New', monospace;
+  }
+
+  /* DATA MODEL */
+  .model-block { margin-bottom: 28px; }
+  .model-name {
+    font-weight: 700; font-size: 15px; color: #0088cc;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e0ecf8;
+  }
+  .fields { display: flex; flex-wrap: wrap; gap: 8px; }
+  .field-pill {
+    background: #e8f3ff; border: 1px solid #c0dbf5;
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 13px; color: #0d1f3c; font-weight: 500;
+  }
+
+  /* REQUIREMENTS */
+  .req-list { display: flex; flex-direction: column; gap: 10px; }
+  .req-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: #f7fbff; border-radius: 8px; border: 1px solid #e0ecf8;
+    font-size: 14px;
+  }
+  .req-item .req-name { font-weight: 600; min-width: 200px; color: #0a0f1e; }
+  .req-item .req-val { color: #555; }
+
+  /* FOOTER */
+  .footer {
+    background: #0d1f3c;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 32px 40px;
+    font-size: 13px;
+  }
+  .footer strong { color: #fff; }
+  .footer a { color: #29b6f6; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .features { grid-template-columns: 1fr; }
+    .modes { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+    .section { padding: 40px 20px; }
+    .divider { margin: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="telegram-icon">✈️</span>
+  <div class="hero-badge">Odoo 18 · Discuss</div>
+  <h1>Telegram <span>Messenger</span> Integration</h1>
+  <p>Bring Telegram directly into your Odoo backend — receive messages, reply to customers, and manage all conversations without switching apps.</p>
+  <div class="badges">
+    <span class="badge">Odoo 18.0</span>
+    <span class="badge green">v18.0.1.0.0</span>
+    <span class="badge blue">Long Polling + Webhook</span>
+    <span class="badge">LGPL-3</span>
+    <span class="badge">EN · UK · DE · ES</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <div class="section-title">Full Telegram integration, native Odoo UI</div>
+  <div class="section-subtitle">One BotFather token. A complete messenger inside Odoo Discuss.</div>
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">🤖</div>
+      <h3>Bot Configuration</h3>
+      <p>Connect any Telegram bot via its BotFather token. One-click connection test fetches bot name and username automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-teal">💬</div>
+      <h3>Chat List &amp; History</h3>
+      <p>Browse all active Telegram conversations. Open any chat to read the full message thread and reply inline.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-green">🔄</div>
+      <h3>Long Polling &amp; Webhook</h3>
+      <p>Choose polling (no public URL needed) or webhook (instant delivery). Both modes are fully supported and switchable.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-purple">📊</div>
+      <h3>Unread Message Counter</h3>
+      <p>See how many unread messages each chat has. Mark conversations as read when you open them.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">⚡</div>
+      <h3>Mini Messenger Sidebar</h3>
+      <p>A lightweight sidebar widget lets you send quick replies from anywhere in the Odoo backend without navigating away.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-green">⏱️</div>
+      <h3>Scheduled Cron Polling</h3>
+      <p>A configurable scheduled action polls all active bots automatically. New chats are created on first contact with no manual setup.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- POLLING VS WEBHOOK -->
+<div class="section">
+  <div class="section-title">Two delivery modes — pick what fits your server</div>
+  <div class="section-subtitle">Switch between modes at any time from the configuration form.</div>
+  <div class="modes">
+    <div class="mode-card polling">
+      <h3>Long Polling</h3>
+      <span class="mode-badge">Recommended</span>
+      <ul>
+        <li>Works behind NAT &amp; firewalls</li>
+        <li>No public HTTPS URL required</li>
+        <li>Great for development &amp; private servers</li>
+        <li>Odoo cron polls at set intervals</li>
+        <li>Zero extra infrastructure</li>
+      </ul>
+    </div>
+    <div class="mode-card webhook">
+      <h3>Webhook</h3>
+      <span class="mode-badge">Production</span>
+      <ul>
+        <li>Instant message delivery</li>
+        <li>Requires public HTTPS URL</li>
+        <li>Registered with Telegram automatically</li>
+        <li>Lower latency than polling</li>
+        <li>Scales to high message volumes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SETUP STEPS -->
+<div class="section">
+  <div class="section-title">Up and running in under 5 minutes</div>
+  <div class="section-subtitle">No coding, no server config — just a BotFather token.</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <h4>Create a Telegram bot</h4>
+        <p>Open <strong>@BotFather</strong> in Telegram, send <code>/newbot</code>, and follow the prompts to get your bot token.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <h4>Open the configuration form</h4>
+        <p>In Odoo, go to <strong>Discuss → Telegram → Configuration</strong> and click New.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <h4>Paste the token &amp; test the connection</h4>
+        <p>Paste your BotFather token and click <strong>Test Connection</strong>. Odoo will verify the token and display the bot name.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+      <div class="step-body">
+        <h4>Enable Long Polling and save</h4>
+        <p>Toggle <strong>Long Polling</strong> on. The scheduled cron will start fetching messages on the next run.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left"><div class="step-num">5</div></div>
+      <div class="step-body">
+        <h4>Send a message to your bot</h4>
+        <p>Send any message to your bot in Telegram, then open <strong>Discuss → Telegram → Chats</strong>. The conversation appears automatically.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DATA MODEL -->
+<div class="section">
+  <div class="section-title">Data model</div>
+  <div class="section-subtitle">Three lightweight models, all accessible from standard Odoo list/form views.</div>
+
+  <div class="model-block">
+    <div class="model-name">telegram.config</div>
+    <div class="fields">
+      <span class="field-pill">name</span>
+      <span class="field-pill">bot_token</span>
+      <span class="field-pill">bot_username (readonly)</span>
+      <span class="field-pill">bot_name (readonly)</span>
+      <span class="field-pill">polling_enabled</span>
+      <span class="field-pill">webhook_url</span>
+      <span class="field-pill">last_update_id</span>
+    </div>
+  </div>
+
+  <div class="model-block">
+    <div class="model-name">telegram.chat</div>
+    <div class="fields">
+      <span class="field-pill">chat_id</span>
+      <span class="field-pill">name</span>
+      <span class="field-pill">username</span>
+      <span class="field-pill">message_ids → telegram.message</span>
+    </div>
+  </div>
+
+  <div class="model-block">
+    <div class="model-name">telegram.message</div>
+    <div class="fields">
+      <span class="field-pill">chat_id → telegram.chat</span>
+      <span class="field-pill">message_id</span>
+      <span class="field-pill">content</span>
+      <span class="field-pill">sender_name</span>
+      <span class="field-pill">is_incoming</span>
+      <span class="field-pill">is_read</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- REQUIREMENTS -->
+<div class="section">
+  <div class="section-title">Requirements</div>
+  <div class="req-list">
+    <div class="req-item"><span class="req-name">Odoo</span><span class="req-val">18.0</span></div>
+    <div class="req-item"><span class="req-name">Python requests</span><span class="req-val">Included in standard Odoo environment</span></div>
+    <div class="req-item"><span class="req-name">Public HTTPS URL</span><span class="req-val">Webhook mode only — not needed for long polling</span></div>
+    <div class="req-item"><span class="req-name">Telegram Bot</span><span class="req-val">Create one for free at @BotFather</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Telegram Messenger Integration</strong> · Version 18.0.1.0.0 · License LGPL-3<br/>
+  Built by <strong>deep</strong> · <a href="https://github.com/SpringlesMcOutrage">github.com/SpringlesMcOutrage</a>
+</div>
+
+</body>
+</html>
